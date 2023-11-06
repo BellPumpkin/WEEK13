@@ -37,30 +37,19 @@ function Login() {
         marginBottom: "10px",
     };
 
-    const loginbuttonStyle = {
-        width: "50%",
-        backgroundColor: "#2104ff",
-        color: "#fff",
-        // padding: "10px",
-        margin: "0 10px",
-        padding: "10px 20px",
-        border: "none",
-        borderRadius: "5px",
-        cursor: "pointer",
-        transition: "background-color 0.3s",
-    };
-
     const signupbuttonStyle = {
-        width: "50%",
-        backgroundColor: "#007bff",
-        color: "#fff",
-        // padding: "10px",
+        margin: "20px",
         padding: "10px 20px",
-        margin: "0 10px",
-        border: "none",
-        borderRadius: "5px",
+        fontSize: "18px",
+        fontWeight: "600",
+        backgroundColor: "#A6B2F6",
+        color: "black",
         cursor: "pointer",
-        transition: "background-color 0.3s",
+        borderRadius: "5px",
+        width: "auto", // 고정 크기 설정
+        minWidth: "100px", // 최소 너비 설정
+        textAlign: "center",
+        whiteSpace: "nowrap", // 긴 텍스트의 줄 바꿈 방지
     };
 
     const labelStyle = {
@@ -75,7 +64,7 @@ function Login() {
             .then(response => {
                 setResponse(response.data);
                 dispatch(logInId({username}));
-                alert(`로그인 성공! ${username}`);
+                alert(`로그인 성공!\n${username}님 어서오세요.`);
                 navigate("/");
             })
             .catch(error => {
@@ -101,10 +90,10 @@ function Login() {
                         <label style={labelStyle}>비밀번호: </label>
                         <input style={inputStyle} onChange={(e) => {setPassword(e.target.value)}} type="password"></input>
                     </div>
-                    <div style={{ paddingLeft: "15px", paddingTop: "20px", display: "flex", justifyContent: "space-between" }}>
-                        <button style={loginbuttonStyle} onClick={handlePostRequest} type="submit">로그인</button>
+                    <div style={{ paddingTop: "20px", display: "flex", justifyContent: "space-between" }}>
+                        <button style={{...signupbuttonStyle}} onClick={() => {navigate("/signup")}}>회원가입</button>
+                        <button style={{...signupbuttonStyle, margin:"20px 5px 20px 0px"}} onClick={handlePostRequest} type="submit">로그인</button>
                         {/* <Link to="/signup" style={{ ...signupbuttonStyle, textAlign: "center", textDecoration: "none" }}>회원가입</Link> */}
-                        <button style={{ ...signupbuttonStyle, textAlign: "center" }} onClick={() => {navigate("/")}}>회원가입</button>
                     </div>
                 </form>
             </div>

@@ -24,7 +24,7 @@ const TableStyles = {
 }
 
 const TableHeaderStyles = {
-  background: 'lightgray',
+  background: '#A6B2F6',
   color: 'black',
   fontWeight: 'bold',
 }
@@ -66,6 +66,7 @@ const SearchButtonStyles = {
 const Home = () => {
     const navigate = useNavigate();
     const posts = useSelector((state) => state.managepost.posts);
+    const sortedPosts = posts.slice().sort((a, b) => a.id - b.id);
 
     // const users = useSelector((state) => state.manageuser.users);
     // console.log(users); // 로그인 후 redux 추가 확인
@@ -86,36 +87,63 @@ const Home = () => {
       <div style={{ display: 'flex', justifyContent: 'center', minHeight: '90vh' }}>
         <div style={{ width: '100%', height: '200px' }}>
           <div style={{ ...CreateBtn }}>
-            <button style={{margin: "20px"}} onClick={() => {navigate("/post");}}>작성하기</button>
+          <button
+              style={{
+                margin: "20px",
+                padding: "10px 20px",
+                fontSize: "18px",
+                fontWeight: "600",
+                backgroundColor: "#A6B2F6",
+                color: "black",
+                cursor: "pointer",
+                borderRadius: "5px",
+              }}
+              onClick={() => navigate("/post")}
+            >작성하기</button>
           </div>
-          <div style={{ width: '100%', height: '200px' }}>
-            <table style={{ ...TableStyles }}>
-              <colgroup>
-                <col style={ColGroupStyles.col1} />
-                <col style={ColGroupStyles.col2} />
-                <col style={ColGroupStyles.col3} />
-                <col style={ColGroupStyles.col4} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th style={{ ...TableHeaderStyles }}>글 번호</th>
-                  <th style={{ ...TableHeaderStyles }}>제목</th>
-                  <th style={{ ...TableHeaderStyles }}>작성일</th>
-                  <th style={{ ...TableHeaderStyles }}>작성자</th>
+          { posts.length > 0 ? ( 
+            <div style={{ width: '100%', height: '200px' }}>
+              <table style={{ ...TableStyles }}>
+                <colgroup>
+                  <col style={ColGroupStyles.col1} />
+                  <col style={ColGroupStyles.col2} />
+                  <col style={ColGroupStyles.col3} />
+                  <col style={ColGroupStyles.col4} />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th style={{ ...TableHeaderStyles }}>글 번호</th>
+                    <th style={{ ...TableHeaderStyles }}>제목</th>
+                    <th style={{ ...TableHeaderStyles }}>작성일</th>
+                    <th style={{ ...TableHeaderStyles }}>작성자</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedPosts.map((post) => (
+                    <tr key={post.id}>
+                    <td style={TableCellStyles}>{post.id}</td>
+                    <td style={TableCellStyles}><Link to={`/post/${post.id}`}>{post.title}</Link></td>
+                    <td style={TableCellStyles}>{post.date}</td>
+                    <td style={TableCellStyles}>{post.author}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {posts.map((post) => (
-                  <tr key={post.id}>
-                  <td style={TableCellStyles}>{post.id}</td>
-                  <td style={TableCellStyles}><Link to={`/post/${post.id}`}>{post.title}</Link></td>
-                  <td style={TableCellStyles}>{post.date}</td>
-                  <td style={TableCellStyles}>{post.author}</td>
-              </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ):(
+            <div style={{ textAlign: 'center',
+            fontSize: "24px",
+            fontFamily: "sans-serif",
+            marginTop: "40px", // 상단 간격 추가
+            color: "#888", // 텍스트 색상 추가
+            padding: "7%",
+           }}>
+              <div>아무 게시물도 없네요.</div>
+              <div style={{ paddingTop: "5px" }}>새로운 글을 작성해보세요.</div>
+            </div>
+          )}
+          
+
           {/* <div style={{ ...SearchStyles }}>
             <label style={{ ...SearchLabelStyles }}>검색 :</label>
             <input style={{ ...SearchInputStyles }} type="text" onChange={(e) => { setFindPost(e.target.value) }} />

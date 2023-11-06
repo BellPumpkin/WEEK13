@@ -42,13 +42,18 @@ const updatePostContainer = {
   };
   
   const submitButtonStyle = {
-    backgroundColor: "#007bff",
-    color: "white",
-    border: "none",
+    margin: "20px",
     padding: "10px 20px",
     fontSize: "18px",
+    fontWeight: "600",
+    backgroundColor: "#A6B2F6",
+    color: "black",
     cursor: "pointer",
-    margin: '10px',
+    borderRadius: "5px",
+    width: "auto", // 고정 크기 설정
+    minWidth: "100px", // 최소 너비 설정
+    textAlign: "center",
+    whiteSpace: "nowrap", // 긴 텍스트의 줄 바꿈 방지
   };
 
 function ReadPost() {
@@ -69,38 +74,38 @@ function ReadPost() {
     <div>
       <div style={updatePostContainer}>
         <h1 style={formTitle}>글</h1>
-            <div style={formGroup}>
+        <div style={{ border: 'solid 1px', padding: '30px' }}>
+          <div style={formGroup}>
             <label htmlFor="title" style={labelStyle}>
             제목 :
             </label>
             <div style={inputStyle}>{post.title}</div>
-            </div>
-
-            <div style={formGroup}>
+          </div>
+          <div style={formGroup}>
             <label htmlFor="author" style={labelStyle}>
             작성자 :
             </label>
             <div style={inputStyle}>{post.author}</div>
-            </div>
+          </div>
 
-            <div style={formGroup}>
+          <div style={formGroup}>
             <label htmlFor="title" style={labelStyle}>
-            작성시간 :
+            작성일 :
             </label>
             <div style={inputStyle}>{post.date}</div>
-            </div>
+          </div>
 
-            <div style={formGroup}>
+          <div style={formGroup}>
             <label htmlFor="title" style={labelStyle}>
             내용 :
             </label>
             <div style={textareaStyle}>{post.content}</div>
-            </div>
-
-            <div>
-                <button style={submitButtonStyle} onClick={() => navigate(`/edit/${post.id}`)}>수정</button>
-                <button style={submitButtonStyle} onClick={deleteUserHandler}>삭제</button>
-            </div>
+          </div>
+        </div>
+          <div>
+              <button style={submitButtonStyle} onClick={() => navigate(`/edit/${post.id}`)}>수정</button>
+              <button style={submitButtonStyle} onClick={deleteUserHandler}>삭제</button>
+          </div>
         </div>
     </div>
 

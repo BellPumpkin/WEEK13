@@ -10,6 +10,8 @@ import Login from 'pages/Login';
 
 import Layout from './Layout';
 
+import Sorry from 'pages/Sorry';
+
 // import Contact from '../pages/Contact';
 // import Works from '../pages/Works';
 // import Work from '../pages/Work';
@@ -33,9 +35,14 @@ const Router = () => {
 
           <Route path="login/" element={<Login />} />
           <Route path="signup/" element={<SignUp />} />
+        <Route path="sorry/" element={<Sorry />} />
 
         </Routes>
       </Layout>
+
+      {/* <Routes>
+      </Routes> */}
+
     </BrowserRouter>
   );
 };

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { addUser } from "redux/modules/manageuser";
 
 function SignUp() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const users = useSelector((state) => state.manageuser.users);
 
     const [userId, setUserId] = useState("");
     const [pw, setPw] = useState("");
@@ -21,16 +23,20 @@ function SignUp() {
         marginBottom: "10px",
     };
 
-    const buttonStyle = {
-        width: "50%",
-        backgroundColor: "#007bff",
-        color: "#fff",
-        padding: "10px",
-        border: "none",
-        borderRadius: "5px",
+    const ButtonStyles = {
+        margin: "20px",
+        padding: "10px 20px",
+        fontSize: "18px",
+        fontWeight: "600",
+        backgroundColor: "#A6B2F6",
+        color: "black",
         cursor: "pointer",
-        transition: "background-color 0.3s",
-    };
+        borderRadius: "5px",
+        width: "auto", // 고정 크기 설정
+        minWidth: "100px", // 최소 너비 설정
+        textAlign: "center",
+        whiteSpace: "nowrap", // 긴 텍스트의 줄 바꿈 방지
+      };
 
     const labelStyle = {
         display: "block",
@@ -54,13 +60,20 @@ function SignUp() {
         // }
 
         else if (pw !== pwCheck){
-            alert("pw, pwCheck 다름");
+            alert("비밀번호와 비밀번호 확인이 같지 않습니다.");
         }
-
+        
         else {
-            alert("회원가입 성공!");
-            dispatch(addUser({userId, pw}));
-            navigate('/');
+            const user = users.find((user) => user.userId === userId)
+            if (user) {
+                alert("존재하는 아이디 입니다.");
+            }
+
+            else {
+                alert("회원가입 성공!");
+                dispatch(addUser({userId, pw}));
+                navigate('/');
+            }
         }
     };
     return (
@@ -92,7 +105,7 @@ function SignUp() {
                             onChange={(e) => setPwCheck(e.target.value)}
                         />
                     </div>
-                    <button style={{...buttonStyle, marginTop:"20px", marginLeft:"80px"}} type="submit">
+                    <button style={{...ButtonStyles, marginTop:"20px", marginLeft:"100px"}} type="submit">
                         회원가입
                     </button>
                 </form>

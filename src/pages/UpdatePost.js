@@ -43,13 +43,18 @@ const textareaStyle = {
 };
 
 const submitButtonStyle = {
-  backgroundColor: "#007bff",
-  color: "white",
-  border: "none",
+  margin: "20px",
   padding: "10px 20px",
   fontSize: "18px",
+  fontWeight: "600",
+  backgroundColor: "#A6B2F6",
+  color: "black",
   cursor: "pointer",
-  margin: "10px",
+  borderRadius: "5px",
+  width: "auto", // 고정 크기 설정
+  minWidth: "100px", // 최소 너비 설정
+  textAlign: "center",
+  whiteSpace: "nowrap", // 긴 텍스트의 줄 바꿈 방지
 };
 
 const UpdatePost = () => {
@@ -71,8 +76,10 @@ const UpdatePost = () => {
       return alert("제목은 10글자 이상");
     }
     const newPostList = posts.filter((p) => p.id !== post.id);
-    dispatch(updatePost(newPostList, { title, content, date, author }));
-    navigate("/");
+    const curPostId = post.id;
+    dispatch(updatePost(newPostList, { curPostId, title, content, date, author }));
+
+    navigate(`/post/${curPostId}`);
   };
 
   return (
@@ -104,7 +111,7 @@ const UpdatePost = () => {
       </div>
       <div style={formGroup}>
         <label htmlFor="date" style={labelStyle}>
-          작성시간 :
+          작성일 :
         </label>
         <input
           type="text"
@@ -130,7 +137,7 @@ const UpdatePost = () => {
         disabled={title === "" || author === "" || date === "" || content === "" ? true : false}
         style={submitButtonStyle}
       >
-        수정
+        수정하기
       </button>
     </div>
   );

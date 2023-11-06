@@ -52,12 +52,13 @@ const textareaStyle = {
 };
 
 const submitButtonStyle = {
-  backgroundColor: "#007bff",
-  color: "white",
-  border: "none",
+  backgroundColor: "#A6B2F6",
+  color: "black",
+  fontWeight: "600",
   padding: "10px 20px",
   fontSize: "18px",
   cursor: "pointer",
+  borderRadius: "5px",
 };
 
 const CreatePost = () => {
@@ -123,7 +124,7 @@ const CreatePost = () => {
 
       <div style={formGroup}>
         <label htmlFor="date" style={labelStyle}>
-          작성시간:
+          작성일:
         </label>
         <input
           type="text"
