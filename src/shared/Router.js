@@ -5,6 +5,9 @@ import CreatePost from '../pages/CreatePost';
 import ReadPost from '../pages/ReadPost';
 import UpdatePost from 'pages/UpdatePost';
 
+import SignUp from 'pages/SignUp';
+import Login from 'pages/Login';
+
 import Layout from './Layout';
 
 // import Contact from '../pages/Contact';
@@ -28,6 +31,9 @@ const Router = () => {
           <Route path="post/:id" element={<ReadPost />} />
           <Route path="edit/:id" element={<UpdatePost />} />
 
+          <Route path="login/" element={<Login />} />
+          <Route path="signup/" element={<SignUp />} />
+
         </Routes>
       </Layout>
     </BrowserRouter>
@@ -37,6 +43,6 @@ const Router = () => {
 export default Router;
 
 
-{/* <Route path="contact" element={<Contact />} />
-<Route path="works" element={<Works />} />
-<Route path="works/:id" element={<Work />} /> */}
+// {/* <Route path="contact" element={<Contact />} />
+// <Route path="works" element={<Works />} />
+// <Route path="works/:id" element={<Work />} /> */}

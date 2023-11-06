@@ -31,8 +31,8 @@ export const updatePost = (payload, newVal) => {
 
 // 초기 상태값
 const initialState = {
-    posts: [{ id: 1, title: "리액트", content: "안녕하세요 송중기 입니다.", date: "19-12-01", author: '송중기'},
-    { id: 2, title: "스프링", content: "안녕하세요 송강 입니다.", date: "21-10-01", author: '송강'}], nextId: 3 
+    posts: [{ id: 1, title: "리액트", content: "안녕하세요 송중기 입니다.", date: "10월 1일 오전 1:00:00", author: '송중기'},
+    { id: 2, title: "스프링", content: "안녕하세요 송강 입니다.", date: "10월 1일 오후 12:00:00", author: '송강'}], nextId: 3 
 }
 
 const managepost = (state = initialState, action) => {
@@ -54,7 +54,7 @@ const managepost = (state = initialState, action) => {
                 posts: [...action.payload], nextId: state.nextId
             }
         case UPDATE_POST:
-            console.log(state.nextId);
+            // console.log(state.nextId);
             return {
                 posts: [...action.payload, {
                     id: state.nextId,

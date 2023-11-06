@@ -1,6 +1,8 @@
 import { legacy_createStore as createStore } from "redux";
 import { combineReducers } from "redux";
 import managepost from "redux/modules/managepost";
+import manageuser from "redux/modules/manageuser";
+import managelogin from "redux/modules/managelogin";
 
 /*
 1. createStore()
@@ -18,6 +20,8 @@ combineReducers은 여러 개의 독립적인 reducer의 반환 값을 하나의
 
 const rootReducer = combineReducers({
     managepost: managepost,
+    manageuser: manageuser,
+    managelogin: managelogin
 }); 
 const store = createStore(rootReducer); 
 
